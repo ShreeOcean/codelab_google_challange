@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -181,35 +182,43 @@ fun AllTaskCompleteScreen() {
     }
 }
 
-@Composable
+/*@Composable
 fun BusinessCardUI() {
     Surface(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFF003004))
+        color = Color(0xFFD2E8D4),
+        modifier = Modifier.fillMaxSize()
     ) {
         Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
+//            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.SpaceBetween,
         ) {
-            //logo section
-            Image(
-                painter = painterResource(id = R.drawable.ic_android_green),
-                contentDescription = "Android Logo",
-                modifier = Modifier
-                    .size(150.dp)
-                    .background(Color.White, RoundedCornerShape(12.dp)),
-                contentScale = ContentScale.Crop
-            )
+            // Top Section (Logo, Name, Job Title)
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.weight(1f) // Pushes the content upwards
+            ) {
+                //logo section
+                Image(
+                    painter = painterResource(id = R.drawable.ic_android_green),
+                    contentDescription = "Android Logo",
+                    modifier = Modifier
+                        .size(100.dp)
+                        .background(Color(0xFF083D05), RoundedCornerShape(12.dp)),
+                    contentScale = ContentScale.Crop
+                )
+            }
+
             Spacer(modifier = Modifier.height(16.dp))
 
             //name section
-            Text(text = "Pragyanshree Das",
+            Text(
+                text = "Pragyanshree Das",
                 style = TextStyle(
-                    fontSize = 32.sp,
+                    fontSize = 25.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
                 )
@@ -220,14 +229,20 @@ fun BusinessCardUI() {
             Text(
                 text = "Android Developer",
                 style = TextStyle(
-                    fontSize = 18.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
                     color = Color(0xFF005007),
                     fontFamily = FontFamily.Serif
                 )
             )
             Spacer(modifier = Modifier.height(32.dp))
-
+        }
+        // Bottom Section (Contact Info)
+        Column(
+            verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.Start,
+            modifier = Modifier.fillMaxWidth()
+        ) {
             //contact info section
             ContactInfo(
                 icon = painterResource(id = R.drawable.contact_phone_green),
@@ -242,25 +257,115 @@ fun BusinessCardUI() {
                 info = "pragyan9423@gmail.com"
             )
         }
+
+    }
+}*/
+
+@Composable
+fun BusinessCardUI() {
+    Surface(
+        color = Color(0xFFE0F2E9), // Light green background color
+        modifier = Modifier.fillMaxSize()
+    ) {
+            // Top Section (Logo, Name, Job Title)
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()
+                    .padding(16.dp), // Pushes the content upwards
+            ) {
+                // Logo section with "Android" text overlay
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .size(100.dp)
+                        .background(Color(0xFF083D05), RoundedCornerShape(13.dp)) // Dark green background
+                ) {
+                    // Logo Image
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_android_green), // Replace with your logo drawable
+                        contentDescription = "Android Logo",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.size(60.dp) // Adjust size as needed
+                    )
+                    // "Android" Text Overlay
+                    Text(
+                        text = "android",
+                        color = Color.White,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 8.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Name section
+                Text(
+                    text = "Pragyanshree Das",
+                    style = TextStyle(
+                        fontSize = 28.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
+                    )
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Job title section
+                Text(
+                    text = "Android Developer",
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = Color(0xFF083D05), // Same dark green color
+                        fontFamily = FontFamily.Serif
+                    )
+                )
+                Spacer(modifier = Modifier.height(32.dp))
+            }
+
+            // Bottom Section (Contact Info)
+            Column(
+                verticalArrangement = Arrangement.Bottom,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth().padding(80.dp)
+            ) {
+                // Contact info section
+                ContactInfo(
+                    icon = painterResource(id = R.drawable.contact_phone_green), // Replace with phone icon
+                    info = "+11 (123) 444 555 666"
+                )
+                ContactInfo(
+                    icon = painterResource(id = R.drawable.share_green), // Replace with share icon
+                    info = "https://g.dev/das94235"
+                )
+                ContactInfo(
+                    icon = painterResource(id = R.drawable.contact_mail_green), // Replace with mail icon
+                    info = "pragyan9423@gmail.com"
+                )
+            }
+
     }
 }
+
 
 @Composable
 private fun ContactInfo(
     icon: Painter,
     info: String
-){
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Absolute.Left,
-        modifier = Modifier.padding(8.dp)
+        horizontalArrangement = Arrangement.Start,
+        modifier = Modifier
+            .padding(4.dp)
+            .fillMaxWidth(0.9f)
     ) {
         Icon(
             painter = icon,
             contentDescription = null,
             modifier = Modifier
-                .size(34.dp)
-                .padding(end = 16.dp),
+                .size(30.dp)
+                .padding(end = 11.dp),
             tint = Color(0xFF003004)
         )
         Text(
